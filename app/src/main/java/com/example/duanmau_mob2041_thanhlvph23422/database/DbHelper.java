@@ -7,12 +7,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DbHelper extends SQLiteOpenHelper {
 
     public DbHelper(Context context){
-        super(context, "DANGKYMONHOC", null, 1);
+        super(context, "DANGKYMONHOC", null, 2);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
         String dbThuThu = "CREATE TABLE THUTHU(matt text primary key, hoten text, matkhau text)";
         db.execSQL(dbThuThu);
+
+
 
         String dbThanhVien = "CREATE TABLE THANHVIEN(matv integer primary key autoincrement, hoten text, namsinh text)";
         db.execSQL(dbThanhVien);
@@ -27,8 +29,30 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(dbPhieuMuon);
 
         // data
-        db.execSQL("INSERT INTO LOAISACH VALUES (1,'thiếu nhi'),(2,'truyện cười'),(3,'Giáo khoa')");
-        db.execSQL("INSERT INTO SACH VALUES(1,'hay doi day',2500,1),(2,'thang cuoi',1000,1),(3,'lap trinh android',2000,3)");
+        db.execSQL("INSERT INTO LOAISACH VALUES (1,'thiếu nhi')," +
+                                                "(2,'truyện cười')," +
+                                                "(3,'Giáo khoa')");
+
+        db.execSQL("INSERT INTO SACH VALUES(1,'hay doi day',2500,1)," +
+                                            "(2,'thang cuoi',1000,1)," +
+                                            "(3,'lap trinh android',2000,3)");
+
+       db.execSQL("INSERT INTO THUTHU VALUES('thuthu01','Nguyen Van A','abc123')," +
+                                            "('thuthu02','Le Viet Thanh','123')");
+
+       db.execSQL("INSERT INTO THANHVIEN VALUES(1,'Mai Van Tung','2000')," +
+                                                "(2,'Tran Thanh Xuan','2000')");
+
+       //Trả sách: 1:đã trả , 0:chưa trả
+
+        db.execSQL("INSERT INTO PHIEUMUON VALUES(1,1,'thuthu01',1,'20/01/2024',1,2500)," +
+                                                "(2,1,'thuthu01',3,'21/01/2024',0,2000),"+
+                                                "(3,2,'thuthu02',1,'23/01/2024',1,2500)");
+
+
+
+
+
     }
 
     @Override
